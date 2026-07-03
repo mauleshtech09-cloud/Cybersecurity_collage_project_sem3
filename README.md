@@ -1,40 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# PhishGuard AI - Enterprise Cybersecurity SaaS Platform
 
-## Getting Started
+PhishGuard AI is an AI-powered phishing detection and live threat intelligence SaaS dashboard built with React, Next.js 16, Recharts, Framer Motion, and real-time Google Sheets backend synchronization.
 
-First, run the development server:
+## 🏛️ Repository Architecture
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+This repository is organized cleanly for production stability and CI/CD pipelines (e.g., Netlify):
+
+```
+├── frontend/             # Core Next.js 16 App Router application
+│   ├── src/
+│   │   ├── app/          # App router pages and layouts
+│   │   ├── components/   # Interactive SOC components (DashboardPreview, ThreatResults, etc.)
+│   │   ├── animations/   # Framer motion transition presets
+│   │   └── utils/        # Helper functions and severity coloring
+│   ├── public/           # Static web assets
+│   └── package.json      # Frontend package configuration and dependencies
+├── netlify.toml          # Production deployment build instructions for Netlify
+├── AGENTS.md             # Development guidelines and agent rules
+└── README.md             # Project documentation
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Why is there no root `package.json`?
+To eliminate multi-lockfile conflicts, build root misdetection, and conflicting Node environments, all npm packages and scripts reside exclusively inside the `frontend/` directory. The root directory is configured purely as the Git repository and deployment wrapper.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+---
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## 🚀 Quickstart & Local Development
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+1. **Navigate to the application directory:**
+   ```bash
+   cd frontend
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-## Learn More
+3. **Start the local development server:**
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. **Access the application:**
+   Open [http://localhost:3000](http://localhost:3000) in your web browser. The dashboard will automatically sync live threat data every 10 seconds.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🌐 Production Deployment (Netlify)
 
-## Deploy on Vercel
+This repository includes a production-tested `netlify.toml` at the root that configures Netlify to build cleanly from the `frontend/` subdirectory.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Automated Netlify Setup:
+1. Connect your Git repository to **Netlify**.
+2. Netlify will automatically read `netlify.toml` and apply the following build settings:
+   - **Base directory**: `frontend`
+   - **Build command**: `npm run build`
+   - **Publish directory**: `frontend/.next`
+   - **Node Version**: `20`
+3. Click **Deploy Site**!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+---
+
+## 🛡️ Key Features
+- **Real-Time Threat Intelligence**: Continuously streams and synchronizes security logs via OpenSheet API.
+- **Dynamic SOC Analytics**: Interactive Recharts visualizations including Threat Severity distribution, Top Brand Impersonation metrics, and real-time KPIs.
+- **AI Phishing Analysis**: Deep automated inspection of suspicious URLs, sender reputation, social engineering markers, and malware indicators.
+- **Glassmorphism UI**: State-of-the-art dark theme aesthetics powered by Tailwind CSS and Framer Motion micro-interactions.
