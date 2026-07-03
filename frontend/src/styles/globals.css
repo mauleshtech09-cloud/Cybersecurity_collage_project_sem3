@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050505; /* Matte Black */
+  --foreground: #ffffff;
+  
+  --primary: #00ff66; /* Neon Green */
+  --secondary: #0077ff; /* Cyber Blue */
+  --accent: #ff2a2a; /* Alert Red */
+  --muted: #0a1128; /* Deep Navy */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Custom Utilities for glassmorphism and cyber effects */
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10;
+  }
+  
+  .glow-primary {
+    box-shadow: 0 0 15px var(--primary);
+  }
+  
+  .glow-secondary {
+    box-shadow: 0 0 15px var(--secondary);
+  }
+  
+  .glow-accent {
+    box-shadow: 0 0 15px var(--accent);
+  }
+  
+  .neon-text-primary {
+    text-shadow: 0 0 10px var(--primary);
+  }
+}
